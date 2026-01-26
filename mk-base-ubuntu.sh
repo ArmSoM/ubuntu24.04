@@ -89,7 +89,7 @@ apt-get -y update
 apt-get -f -y upgrade
 
 if [ "$TARGET" == "gnome" ]; then
-   \${APT_INSTALL} ubuntu-desktop rsyslog sudo dialog apt-utils ntp evtest onboard language-pack-en-base ssh iputils-ping systemd
+   \${APT_INSTALL} ubuntu-desktop-minimal rsyslog sudo dialog apt-utils ntp evtest onboard language-pack-en-base ssh iputils-ping systemd
 elif [ "$TARGET" == "xfce" ]; then
     \${APT_INSTALL} xubuntu-core rsyslog sudo dialog apt-utils ntp evtest udev
 elif [ "$TARGET" == "server" ]; then

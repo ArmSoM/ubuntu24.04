@@ -262,9 +262,6 @@ if [[ "$TARGET" == "gnome" ||  "$TARGET" == "xfce" || "$TARGET" == "gnome-full" 
     # echo -e "\033[47;36m ------ Install openbox ----- \033[0m"
     # \${APT_INSTALL} /packages/openbox/*.deb
 
-    echo -e "\033[47;36m ------ update chromium ----- \033[0m"
-    \${APT_INSTALL} /packages/chromium/*.deb
-
     # echo -e "\033[47;36m --------- firefox-esr ------ \033[0m"
     # \${APT_INSTALL} /packages/firefox/*.deb
 fi
@@ -296,6 +293,13 @@ if [[ "$TARGET" == "gnome-full" || "$TARGET" == "xfce-full" ]]; then
 fi
 
 apt autoremove -y
+\${APT_INSTALL} ubuntu-desktop
+
+add-apt-repository ppa:mozillateam/ppa && \
+echo 'Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001' | tee /etc/apt/preferences.d/mozilla-firefox && \
+apt-get update && \${APT_INSTALL} firefox
 
 # mark package to hold
 apt list --upgradable | cut -d/ -f1 | xargs apt-mark hold
